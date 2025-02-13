@@ -7,5 +7,5 @@
 ### Sección: 10-2
 
 ### Descripción del repositorio
-	Este es mi primer curso
+	Este es mi primer curso de programación web
 
