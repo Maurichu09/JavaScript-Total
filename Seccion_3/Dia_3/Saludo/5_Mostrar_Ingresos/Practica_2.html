@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingreso de usuario 1</title>
+</head>
+
+<body>
+    <p>Ingresa tu artista favorito</p>
+    <input type="text" id="LuisMiguel">
+    <button onclick="mostrarTexto()">Ingresar</button>
+    <h1 id="salida">¿Cual es tu artista favorito?</h1>
+
+    <script>
+        function mostrarTexto() {
+            let elementoNombre = document.getElementById("LuisMiguel")
+            let elementoTexto = document.getElementById("salida")
+            let mensaje = "Tu artista favorito es " + elementoNombre.value 
+
+            elementoTexto.textContent = mensaje
+        }
+
+    </script>
+
+</body>
+
+</html>

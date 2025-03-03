@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingreso de usuario 1</title>
+</head>
+
+<body>
+    <p>Ingresa tu juego</p>
+    <input type="text" id="inputTexto">
+    <button onclick="mostrarTexto()">Ingresar</button>
+    <h1 id="salida">¿Cual es tu juego favorito?</h1>
+
+    <script>
+        function mostrarTexto() {
+            let elementoNombre = document.getElementById("inputTexto")
+            let elementoTexto = document.getElementById("salida")
+            let mensaje = "Tu juego favorito es " + elementoNombre.value 
+
+            elementoTexto.textContent = mensaje
+        }
+
+    </script>
+
+</body>
+
+</html>
