@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cotidiano juego de preguntas</title>
+    <link rel="stylesheet" href="EsTiLoS.css">
+</head>
+
+<body onload="comenzarTiempo()">
+    <h1 ip="textoAlarma" style="color: red">30</h1>
+    <h1>Responde las preguntas lo mas rapido que puedas</h1>
+    <h2>1. ¿Cual es el nombre de la primera generación de pokemon?</h2>
+    <input type="text">
+    <h2>2. ¿Cual es el nombre del billete ofcial de Costa Rica?</h2>
+    <input type="text">
+    <h2>3. ¿Cuando es el día de Goku?</h2>
+    <input type="text">
+    <h2>4. ¿Como se llama la Nintendo actual?</h2>
+    <input type="text">
+    <h2>5.¿Nombre de la ultima serie de Dragon ball?</h2>
+    <input type="text">
+    <ul>
+    <button onclick="termine()">Terminé!</button>
+    <button onclick="location.reload()">Volver a Intentar</button>
+    </ul>
+
+    <audio>
+    <source scr="./Audios/gameover.mp3" type="audio/mpeg">
+    Sonido no habilitado
+    </audio>
+
+    <script>
+        let elementoTextoAlarma = document.getElementById("textoAlarma")
+        function comenzarTiempo(){
+
+        }
+        function tiemploCumplido(){
+            elementoTextoAlarma.style.color = "red"
+            elementoTextoAlarma.play();
+        }
+        function comenzarTiempo() {
+            setInterval(ticTac, 1000);
+        }
+
+        function ticTac() {
+            let tiempoActual = new Date();
+            let dia = tiempoActual.getDay();
+            let hora = tiempoActual.getHours();
+            let minutos = tiempoActual.getMinutes();
+            let segundos = String(tiempoActual.getSeconds()).padStart(2, "0")
+        }
+        function termine(){
+            let termine = document.getElementById("termine");
+            alert("Terminastes!, las respuestas eran: Kanto, el colón, 9 de mayo, la Nintendo actual es la Nintendo Switch y la ultima serie de Dragon Ball es Dragon Ball Diama" + dia + ":" + hora + ":" + minutos + segundos)
+        }
+
+    </script>
+</body>
+</html>
