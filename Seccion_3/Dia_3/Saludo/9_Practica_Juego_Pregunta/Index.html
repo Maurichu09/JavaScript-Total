@@ -3,10 +3,27 @@
 <head>
     <title>Cotidiano juego de preguntas</title>
     <link rel="stylesheet" href="EsTiLoS.css">
+    <audio id="audioAlarma">
+        <source scr="./Audios/gameover.mp3" type="audio/mpeg">
+        Sonido no habilitado
+        </audio>
+    <style>
+        #contador {
+            font-size: 2em;
+            margin: 20px;
+        }
+
+        button {
+            font-size: 1em;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
-<body onload="comenzarTiempo()">
-    <h1 ip="textoAlarma" style="color: red">30</h1>
+<body onload="iniciarContador()">
+    <div id="contador" style="color: red">30</div>
     <h1>Responde las preguntas lo mas rapido que puedas</h1>
     <h2>1. ¿Cual es el nombre de la primera generación de pokemon?</h2>
     <input type="text">
@@ -19,27 +36,52 @@
     <h2>5.¿Nombre de la ultima serie de Dragon ball?</h2>
     <input type="text">
     <ul>
-    <button onclick="termine()">Terminé!</button>
+    <button id="btnDetener">Terminé!</button>
     <button onclick="location.reload()">Volver a Intentar</button>
     </ul>
 
-    <audio>
-    <source scr="./Audios/gameover.mp3" type="audio/mpeg">
-    Sonido no habilitado
-    </audio>
 
     <script>
         let elementoTextoAlarma = document.getElementById("textoAlarma")
-        function comenzarTiempo(){
+        let tiempo = 30;  // Tiempo inicial en segundos
+        let intervalo = null;  // Variable para almacenar el intervalo
+        
 
+        function actualizarContador() {
+            document.getElementById("contador").textContent = tiempo;
+        }
+
+        function contar() {
+            if (tiempo > 0) {
+                tiempo--;
+                actualizarContador();
+            } else {
+                detenerContador();
+                alert("Tiempo terminado!");
+            }
+        }
+
+        function iniciarContador() {
+            if (intervalo === null) { // Evita múltiples intervalos activos
+                intervalo = setInterval(contar, 1000);
+            }
+        }
+
+        function detenerContador() {
+            clearInterval(intervalo);
+            intervalo = null;
+            alert("Has terminado, las respuestas eran: Kanto, El colón, el 9 de mayo, nintendo switch y dragon ball daima")
         }
         function tiemploCumplido(){
             elementoTextoAlarma.style.color = "red"
             elementoTextoAlarma.play();
         }
-        function comenzarTiempo() {
+        function comenzarReloj() {
             setInterval(ticTac, 1000);
         }
+          // Asignar eventos a los botones
+          document.getElementById("btnDetener").addEventListener("click", detenerContador);
+          actualizarContador(); // Mostrar 30 al inicio
 
         function ticTac() {
             let tiempoActual = new Date();
@@ -47,11 +89,10 @@
             let hora = tiempoActual.getHours();
             let minutos = tiempoActual.getMinutes();
             let segundos = String(tiempoActual.getSeconds()).padStart(2, "0")
+            let textoHora = dia + ":" + hora + ":" + minutos  + ":" + segundos;
+            elementoTextoAlarma.textContent = textoHora;
         }
-        function termine(){
-            let termine = document.getElementById("termine");
-            alert("Terminastes!, las respuestas eran: Kanto, el colón, 9 de mayo, la Nintendo actual es la Nintendo Switch y la ultima serie de Dragon Ball es Dragon Ball Diama" + dia + ":" + hora + ":" + minutos + segundos)
-        }
+
 
     </script>
 </body>
