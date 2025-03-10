@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<head>
+<title>Parámetros 1</title>
+</head>
+
+<body>
+    <p>Primer numero</p>
+    <input type="number" ip="primerNumero">
+    <p>Segundo numero</p>
+    <input type="number" ip="segundoNumero">
+<p>
+<button onclick="suma()">Click aqui</button>
+</p>
+<script>
+    function sumar(numero1, numero2){
+        let suma = document.getElementById("resultado")
+        resultado = parseInt(numero1) + parseInt(numero2);
+        alert(resultado.value);
+    }
+
+</script>
+</body>
+
+</html>

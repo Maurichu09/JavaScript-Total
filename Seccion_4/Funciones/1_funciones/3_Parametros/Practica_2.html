@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<head>
+<title>Parámetros 2</title>
+</head>
+
+<body>
+    <p>Ingresa un mensaje</p>
+    <input type="text" id="mensajeUsuario">
+<p>
+<button onclick="mostrarMensaje()">Click aqui</button>
+</p>
+<script>
+    function mostrarMensaje(){
+        let miMensaje = document.getElementById("mensajeUsuario")
+        alert("Tu mensaje fue " + miMensaje.value)
+    }
+</script>
+</body>
+
+</html>
