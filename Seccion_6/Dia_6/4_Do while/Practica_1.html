@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Loop Do while 1</title>
+    <title>while</title>
 </head>
 <body>
     <script>
-        function testLoop(numeroVueltas) {
+        function testLoop(cantidadVueltas) {
             let contador = 1;
             do {
-                console.log("Vuelta numero: " + contador);
+                console.log("EL numero de la vuelta actual es: " + contador);
                 contador++;
-            } while (contador <= numeroVueltas);
+            } while (contador <= cantidadVueltas);
         }
-        let vueltas = parseInt(prompt("¿Cuantas vueltas quieres realizar?"));
-        testLoop(vueltas);
+        let Vueltas = parseInt(prompt("¿Cual es la cantidad de vueltas que quieres dar?"));
+        testLoop(Vueltas);
     </script>
 </body>
 </html>
