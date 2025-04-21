@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <title>Etiquetas</title>
+    <style background="red"></style>
+</head>
+<body>
+    <script>
+        let array1 = [[2, 4, 5], [3, 0, 6], [9, 4, 7]];
+        loopExterno:
+        for (let numero of array1){
+            if (numero > 0) {
+                console.log (numero);
+            }else
+            continue loopExterno;
+        }
+    </script>
+</body>
+</html>

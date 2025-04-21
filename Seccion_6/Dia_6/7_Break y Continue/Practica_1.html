@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <title>Break y Continue</title>
+    <style background="red"></style>
+</head>
+<body>
+    <script>
+        let array1 = ["A", "A", "B", "A", "B", "B", "A"];
+
+        for (let letra of array1) {
+            if (letra < "B") {
+                console.log(letra);
+            } else{
+                //continue;
+                break;
+                console.log("Letra menor que B");
+            }
+        }
+    </script>
+</body>
+</html>

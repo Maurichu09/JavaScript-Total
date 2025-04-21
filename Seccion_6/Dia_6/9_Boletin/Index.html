@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+    <title>Etiquetas</title>
+    <style>
+        h1{
+            color: red;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            font-size: 1em;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        h2{
+            color: blue;
+        }
+        p{
+            color: blue;
+        }
+    </style>  
+</head>
+<body>
+    <h1>Bienvenido al boletin estudiantil</h1>
+    <h2>Alumno: Mbamessi Empotrado Feliz</h2>
+    <h3>Notas</h3>
+    <br>
+    <p>7, 4, 8, 9, 6</p>
+    <br>
+    <h3>Promedio:</h3>
+    <h4 id="respuesta">---</h4>
+    <br>
+    <button onclick="Promedio()">Buscar</button>
+    <br>
+    <h3>Nota mas alta:</h3>
+    <h4 id="respuesta1">---</h4>
+    <br>
+    <button onclick="NotaAlta()">Buscar</button>
+    <br>
+    <h3>¿Hubo aplazados?</h3>
+    <h4 id="respuesta2">---</h4>
+    <br>
+    <button onclick="Aplazado()">Buscar</button>
+    <br>
+    <script>
+        function Promedio() {
+            let elementoPromedio = document.getElementById("Promedio");
+            let elementoRespuesta = document.getElementById("respuesta");
+
+            array1 = [7 + 4 + 8 + 9 + 6]
+            for(let numero of array1){
+                if (numero / 2){
+                    elementoPromedio = (numero / 5)
+                    elementoRespuesta.textContent = elementoPromedio
+                }
+            }
+
+        }
+        function NotaAlta() {
+            let elementoAlta = document.getElementById("NotaAlta");
+            let elementoRespuesta = document.getElementById("respuesta1");
+            elementoRespuesta.textContent = 9
+        }
+        function Aplazado() {
+            let elementoAplazado = document.getElementById("Aplazado");
+            let elementoRespuesta = document.getElementById("respuesta2");
+
+            array2 = [7 + 4 + 8 + 9 + 6 / 5]
+            for(let aplazado of array2){
+                if (numero > 4){
+                    elementoRespuesta.textContent()
+                }
+            }
+        }
+    </script>
+</body>
+</html>
