@@ -41,7 +41,7 @@
     <br>
     <button onclick="NotaAlta()">Buscar</button>
     <br>
-    <h3>¿Hubo aplazados?</h3>
+    <h3>¿Esta aplazado?</h3>
     <h4 id="respuesta2">---</h4>
     <br>
     <button onclick="Aplazado()">Buscar</button>
@@ -69,10 +69,14 @@
             let elementoAplazado = document.getElementById("Aplazado");
             let elementoRespuesta = document.getElementById("respuesta2");
 
-            array2 = [7 + 4 + 8 + 9 + 6 / 5]
+            array2 = [7 + 4 + 8 + 9 + 6]
             for(let aplazado of array2){
-                if (numero > 4){
-                    elementoRespuesta.textContent()
+                elementoAplazado = (aplazado / 5)
+                if (elementoAplazado < 4 && elementoAplazado >= 4){
+                    elementoRespuesta.textContent = "Si"
+                } else {
+                    if (elementoAplazado > 4)
+                    elementoRespuesta.textContent = "No"
                 }
             }
         }
