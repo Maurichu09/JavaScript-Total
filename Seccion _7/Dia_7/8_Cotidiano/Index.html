@@ -4,12 +4,11 @@
 <head>
     <title>Registro de Empleados</title>
     <link rel="stylesheet" href="misEstilos.css">
-    <script src="misScripts.js"></script>
 </head>
 
 <body>
 <h1>Registro de Empleados</h1>
-<h2>Espediente</h2>
+<h2>Expediente</h2>
 <input type="text" id="expediente">
 <h2>Nombre</h2>
 <input type="text" id="nombre">
@@ -24,6 +23,41 @@
 <br>
 <button onclick="mostrarEmpleados()">Mostrar empleados</button>
 <br>
+<script>
+    let empleado = [];
+
+function Empleado(Expediente, Nombre, Apellido, Nacimiento, Cargo) {
+    this.Expediente = Expediente;
+    this.Nombre = Nombre;
+    this.Apellido = Apellido;
+    this.Nacimiento = Nacimiento;
+    this.Cargo = Cargo;
+}
+
+function agregarEmpleado() {
+    let Expediente = document.getElementById("expediente");
+    let Nombre = document.getElementById("nombre");
+    let Apellido = document.getElementById("apellido");
+    let Nacimiento = document.getElementById("nacimiento");
+    let Cargo = document.getElementById("cargo");
+
+    if(Expediente && Nombre && Apellido && Nacimiento && Cargo) {
+        let empleadoNuevo = new Empleado(Expediente, Nombre, Apellido, Nacimiento, Cargo);
+        empleado.push(empleadoNuevo);
+    }
+}
+function mostrarEmpleados() {
+    let mensaje = "Lista de Empleados:\n";
+    empleado.forEach(emp => {
+        mensaje += "expediente: " + Expediente + "\n";
+        mensaje += "nombre: " + Nombre + mensaje + " " + Apellido + "\n";
+        mensaje += "nacimiento: " + Nacimiento + "\n";
+        mensaje += "cargo: " + Cargo + "\n\n";
+    });
+ 
+    alert(mensaje);
+}
+</script>
 </body>
 
 </html>
