@@ -1,0 +1,23 @@
+        button {
+            font-size: 1em;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }        
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1{
+            color: red;
+        }
+        button{
+            background-color: greenyellow;
+        }
+        li{
+            font-size: 1em;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+  <head>
+    <title>Modificar Prototipos</title>
+  </head>
+
+  <body>
+    <script>
+        function videojuegos(nombre, empresa, fechaLanzamiento){
+            this.nombre = nombre;
+            this.empresa = empresa;
+            this.fechaLanzamiento = fechaLanzamiento;
+        }
+
+        let videojuego1 = new videojuegos("Mario Bros", "Nintendo", 1983);
+        let videojuego2 = Object.create(videojuego1);
+
+        function prototipos() {
+            console.log(videojuego2);
+            alert(nombre + " se a iniciado");
+        }
+
+        prototipos();
+            
+    </script>
+  </body>
+</html>
