@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Pagina 1</title>
+</head>
+    <script>
+        class colegio{
+            constructor(nombre, ubicacion, cantEstudiantes){
+                this.nombre = nombre;
+                this.ubicacion = ubicacion;
+                this._cantEstudiantes = cantEstudiantes;
+            }
+            get cantEstudiantes(){
+            return this._cantEstudiantes;
+            }
+
+            set cantEstudiantes(nuevosestudiantes){
+                this._cantEstudiantes = nuevosestudiantes
+            }
+        }
+        let cole = new colegio("ColePollones", "Alajuela", 879);
+    </script>
+
+</html>
