@@ -1,0 +1,8 @@
+{
+    "nombre": "Collegium",
+    "direccion": {
+        "calle": "Calle Publica 123",
+        "ciudad": "BuenosAires"
+    },
+    "estudiantes": "Pedro Picapiedra, Pedro Marmol y Vilma Picapiedra"
+}
