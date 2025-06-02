@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Banco Pollitos</title>
+    <link rel="stylesheet" href="misEstilos.css">
+</head>
+    <img src="/Seccion-10/Dia-10/4-Cuenta Bancaria/WhatsApp Image 2025-06-02 at 1.02.17 PM.jpg"
+    width="15%"
+    alt="Banco los Pollitos"
+    aling="left"
+    hspace="20%"
+    <p aling="Justify">
+    <h1>Banco los Pollitos</h1>
+    <br>
+    <div id="banco"></div>
+    <br>
+    <div id="sucursal"></div>
+    <div id="titular"></div>
+    <div id="numero_cuenta"></div>
+    <br>
+    <div id="USD"></div>
+    <div id="EUR"></div>
+    <br>
+    <div id="numero_tarjeta"></div>
+    <div id="abierto"></div>
+
+    <script>
+        let datosJson;
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', "Banco.json", true);
+
+        xhr.responseType = 'json';
+
+        xhr.onload = function() {
+            if(xhr.status === 200) {
+                datosJson = xhr.response;
+                let elementoBanco = document.getElementById("banco");
+                elementoBanco.textContent = datosJson.banco;
+                let elementoSucursal = document.getElementById("sucursal");
+                elementoSucursal.textContent = datosJson.sucursal;
+                let elementoTitular = document.getElementById("titular");
+                elementoTitular.textContent = datosJson.titular;
+                let elementoCuenta = document.getElementById("numero_cuenta");
+                elementoCuenta.textContent = datosJson.numero_cuenta;
+                let elementoUSD = document.getElementById("USD");
+                elementoUSD.textContent = datosJson.saldo.USD;
+                let elementoEUR = document.getElementById("EUR");
+                elementoEUR.textContent = datosJson.saldo.EUR;
+                let elementoTarjeta = document.getElementById("numero_tarjeta");
+                elementoTarjeta.textContent = datosJson.numero_tarjeta;
+                let elementoAbierto = document.getElementById("abierto");
+                elementoAbierto.textContent = datosJson.abierto;
+        } else {
+            }
+        }
+        xhr.send();
+    </script>
+
+</html>

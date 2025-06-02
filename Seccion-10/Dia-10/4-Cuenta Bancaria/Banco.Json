@@ -1,0 +1,12 @@
+{
+    "banco": "Banco los Pollitos",
+    "sucursal": "San Rafael",
+    "titular": "Mbamessi Pozo Tranquilo",
+    "numero_cuenta": "1234 5678 9101 1121",
+    "saldo":{
+        "USD": "$190.827",
+        "EUR": "€1209"
+    },
+    "numero_tarjeta": "2304 7586 4953 8675",
+    "abierto": "16/08/25"
+}

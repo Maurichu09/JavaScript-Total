@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <head>
+    <title>JSON</title>
+  </head>
+  <body>
+    <script>
+        let nombre;
+        let calle;
+        let ciudad;
+        let cantEstudiantes;
+        let estudiantes;
+
+        function ejecutar(){
+            fetch('colegio.json')
+            .then(colegio => colegio.json())
+            .then(function(salida) {
+                nombre = salida.nombre;
+                calle = salida.calle;
+                ciudad = salida.ciudad;
+                cantEstudiantes = salida.cantEstudiantes;
+                estudiantes = salida.estudiantes;
+                console.log({ nombre, calle, ciudad, cantEstudiantes, estudiantes});
+            })
+        .catch(function(error) {
+          console.log(Error);
+        });
+        }
+    </script>
+  </body>
+</html>

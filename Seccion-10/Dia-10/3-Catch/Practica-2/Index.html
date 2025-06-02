@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+  <head>
+    <title>JSON</title>
+  </head>
+  <body>
+    <script>
+        let titulo;
+        let director;
+        let lanzamiento;
+        let duracion;
+        let actores;
+        let premioOscar;
+
+        function ejecutar(){
+            fetch('pelicula.json')
+            .then(pelicula => pelicula.json())
+            .then(function(salida) {
+                titulo = salida.titulo;
+                director = salida.director;
+                lanzamiento = salida.lanzamiento;
+                duracion = salida.duracion;
+                actores = salida.actores;
+                premioOscar = salida.premioOscar;
+                console.log({ titulo, directo, lanzamiento, duracion, actores, premioOscar});
+            })
+        .catch(function(error) {
+          console.log(Error);
+        });
+        }
+    </script>
+  </body>
+</html>
