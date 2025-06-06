@@ -1,0 +1,9 @@
+{
+    "estudiantes": [
+        {"nombre": "María RodrIguez"},
+        {"nombre": "Juan Pérez"},
+        {"nombre": "Ana López"},
+        {"nombre": "Luis Jiménez"},
+        {"nombre": "Carla Vega"}
+    ] 
+}
