@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+  <head>
+    <title>JSON</title>
+  </head>
+  <body>
+    <script>
+        function test(callback) {
+            setTimeout(function () {
+                console.log("Imprimiendo mensaje");
+                callback();
+            }, 1500);
+        }
+
+        function mensaje() {
+            console.log("Mensaje impreso");
+        }
+        test(mensaje);
+        alert("Mensaje impreso");
+    </script>
+  </body>
+</html>

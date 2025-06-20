@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+        let miPromesa = new Promise(function(resolve, reject){
+            setTimeout(function(){
+                let error = false;
+                if(error){
+                    reject("La promesa ha fallado")
+                }else{
+                    resolver("La promesa se ha cumplido");
+                }
+            })
+        })
+
+        miPromesa.then(function(resultado){
+            console.log(resultado);
+        }).catch(function(error){
+            console.log(error);
+        })
+    </script>
+</body>
+</html>
