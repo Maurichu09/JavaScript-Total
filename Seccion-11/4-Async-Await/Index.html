@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+        let dolar;
+        let montoDolares = 100;
+
+        fetch(`https://open.er-api.com/v6/latest/USD`)
+        .then(res => res.json())
+        .then(data =>{
+            dolar = data.rates.CRC;
+            console.log("Tasa obteida:", dolar);
+        });
+
+        let colones = montoDolares * dolar;
+        console.log(`${montoDolares} dolares son aproximadamente ${colones} colones`);
+    </script>
+</body>
+</html>

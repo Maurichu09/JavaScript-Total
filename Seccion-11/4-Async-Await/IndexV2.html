@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+        async function convertirDolares(){
+            let montoDolares = 100;
+            console.log("Obteniendo tasa de conversión...")
+
+            try{
+                let respuesta = await fetch('https://open.er-api.com/v6/latest/USD');
+                let datos = await respuesta.json();
+                let tasaCRC = datos.rates.CRC;
+
+                let colones = montoDolares * rasaCRC;
+                console.log('${montoDolares} dolares son aproximadamente ${colones.toFixed(2) colones}');
+            } catch (error) {
+                console.error("Error al obtener la tasa:", error);
+            }
+        }
+
+        convertirDolares();
+    </script>
+</body>
+</html>
