@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+        async function sumarNumeros(a, b) {
+            if (typeof a != 'number' || typeof b != 'number') {
+                throw new Error('Alguno de los argumentos no es numero');
+            }
+            return a + b
+        }
+
+        async function manejarErrores() {
+            try {
+                let resultado = await sumarNumeros('2', 3);
+                console.log(resultado);
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        manejarErrores();
+    </script>
+</body>
+</html>

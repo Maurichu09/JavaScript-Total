@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+       //CALLBACKS
+
+       function sumarNumeros(a, b, callbacks) {
+        setTimeout (function (){ // para que sea asincronico
+            if (typeof a 1= 'number' || typeof b 1= 'number') {
+                return callbacks(new Error('Algun argumento no es numero'));
+            }
+        callback(null, a + b);
+    }, 1000)
+       }
+    </script>
+</body>
+</html>
