@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Tienda de Teléfonos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      input,
+      button {
+        margin: 5px;
+        padding: 10px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+      }
+    </style>
+</head>
+<body onload="obtenerTodos()">
+    <div class="titulo">
+        <h1>Tienda de Teléfonos</h1>
+    </div>
+
+    <h2>Lista de Teléfonos</h2>
+    <table id="tablaProductos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Consultar Teléfono por ID</h2>
+    <input type="number" id="idConsultar" placeholder="ID">
+    <button onclick="consultarUno()">Consultar</button>
+    <div>
+        <input type="text" id="marcaEditar" placeholder="Marca">
+        <input type="text" id="modeloEditar" placeholder="Modelo">
+        <input type="number" id="precioEditar" placeholder="Precio">
+        <button onclick="modificarUno()">Modificar</button>
+        <button onclick="eliminarUno()">Eliminar</button>
+    </div>
+
+    <h2>Agregar Teléfono</h2>
+    <input type="text" id="marcaNuevo" placeholder="Marca">
+    <input type="text" id="modeloNuevo" placeholder="Modelo">
+    <input type="number" id="precioNuevo" placeholder="Precio">
+    <button onclick="agregarUno()">Agregar</button>
+
+    <script>
+        const API_URL = 'https://9a4b2883-43b3-4fae-b992-585b361462b2-00-1gp099m7m1jj0.janeway.replit.dev/';
+
+        async function obtenerTodos() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            const tbody = document.querySelector("#tablaProductos tbody");
+            tbody.innerHTML = "";
+            data.forEach(function(tel) {
+                tbody.innerHTML += 
+                    "<tr>" +
+                        "<td>" + tel.id + "</td>" +
+                        "<td>" + tel.marca + "</td>" +
+                        "<td>" + tel.modelo + "</td>" +
+                        "<td>" + tel.precio + "</td>" +
+                    "</tr>";
+            });
+        }
+
+        async function consultarUno() {
+            var id = document.getElementById("idConsultar").value;
+            if (!id) {
+                alert("Ingrese un ID");
+                return;
+            }
+            const res = await fetch(API_URL + "/" + id);
+            if (!res.ok) {
+                alert("Teléfono no encontrado");
+                return;
+            }
+            const tel = await res.json();
+            document.getElementById("marcaEditar").value = tel.marca;
+            document.getElementById("modeloEditar").value = tel.modelo;
+            document.getElementById("precioEditar").value = tel.precio;
+        }
+
+        async function agregarUno() {
+            var marca = document.getElementById("marcaNuevo").value;
+            var modelo = document.getElementById("modeloNuevo").value;
+            var precio = document.getElementById("precioNuevo").value;
+            if (!marca || !modelo || !precio) {
+                alert("Complete todos los campos");
+                return;
+            }
+
+            const res = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ marca: marca, modelo: modelo, precio: precio })
+            });
+
+            if (res.ok) {
+                alert("Teléfono agregado correctamente");
+                obtenerTodos();
+            }
+        }
+
+        async function modificarUno() {
+            var id = document.getElementById("idConsultar").value;
+            var marca = document.getElementById("marcaEditar").value;
+            var modelo = document.getElementById("modeloEditar").value;
+            var precio = document.getElementById("precioEditar").value;
+            if (!id || !marca || !modelo || !precio) {
+                alert("Complete todos los campos");
+                return;
+            }
+
+            const res = await fetch(API_URL + "/" + id, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ marca: marca, modelo: modelo, precio: precio })
+            });
+
+            if (res.ok) {
+                alert("Teléfono modificado correctamente");
+                obtenerTodos();
+            }
+        }
+
+        async function eliminarUno() {
+            var id = document.getElementById("idConsultar").value;
+            if (!id) {
+                alert("Ingrese un ID");
+                return;
+            }
+
+            const res = await fetch(API_URL + "/" + id, { method: "DELETE" });
+            if (res.ok) {
+                alert("Teléfono eliminado correctamente");
+                obtenerTodos();
+                document.getElementById("marcaEditar").value = "";
+                document.getElementById("modeloEditar").value = "";
+                document.getElementById("precioEditar").value = "";
+            }
+        }
+    </script>
+</body>
+</html>

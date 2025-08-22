@@ -1,0 +1,215 @@
+CREATE DATABASE BasededatosRep;
+GO
+USE BaseDeDatosReparaciones;
+GO
+
+CREATE TABLE Especialidad (
+    codigodeespecialidad INT PRIMARY KEY IDENTITY(1,1),
+    nombreespecialidad VARCHAR(100) NOT NULL
+);
+GO
+
+
+CREATE TABLE Area (
+    codigoarea INT PRIMARY KEY IDENTITY(1,1),
+    nombrearea VARCHAR(100) NOT NULL
+);
+GO
+
+
+CREATE TABLE Departamento (
+    codigodepartamento INT PRIMARY KEY IDENTITY(1,1),
+    nombredepartamento VARCHAR(100) NOT NULL,
+    codigoarea INT NOT NULL,
+    FOREIGN KEY (codigoarea) REFERENCES Area(codigoarea)
+);
+GO
+
+CREATE TABLE Tecnico (
+    codigotecnico INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(100) NOT NULL,
+    especialidad INT NOT NULL,
+    cedula VARCHAR(15) NOT NULL UNIQUE,
+    codigodepartamento INT NOT NULL,
+    FOREIGN KEY (especialidad) REFERENCES Especialidad(codigodeespecialidad),
+    FOREIGN KEY (codigodepartamento) REFERENCES Departamento(codigodepartamento)
+);
+GO
+
+
+CREATE TABLE Reparacion (
+    codigoreparacion VARCHAR(10) PRIMARY KEY,
+    dano VARCHAR(255),
+    observaciones TEXT,
+    codigodepartamento INT NOT NULL,
+    fecha DATE NOT NULL,
+    FOREIGN KEY (codigodepartamento) REFERENCES Departamento(codigodepartamento)
+);
+GO
+
+CREATE TABLE Parte (
+    codigoparte INT PRIMARY KEY IDENTITY(1,1),
+    nombreparte VARCHAR(100) NOT NULL,
+    cantidadexistencia INT NOT NULL,
+    descripciondetallada TEXT,
+    costounidad DECIMAL(10,2) NOT NULL
+);
+GO
+
+
+CREATE TABLE TecnicoReparacion (
+    codigotecnico INT NOT NULL,
+    codigoreparacion VARCHAR(10) NOT NULL,
+    PRIMARY KEY (codigotecnico, codigoreparacion),
+    FOREIGN KEY (codigotecnico) REFERENCES Tecnico(codigotecnico),
+    FOREIGN KEY (codigoreparacion) REFERENCES Reparacion(codigoreparacion)
+);
+GO
+
+
+CREATE TABLE ParteReparacion (
+    codigoparte INT NOT NULL,
+    codigoreparacion VARCHAR(10) NOT NULL,
+    cantidad_usada INT NOT NULL,
+    PRIMARY KEY (codigoparte, codigoreparacion),
+    FOREIGN KEY (codigoparte) REFERENCES Parte(codigoparte),
+    FOREIGN KEY (codigoreparacion) REFERENCES Reparacion(codigoreparacion)
+);
+GO
+
+
+INSERT INTO Especialidad (nombreespecialidad) VALUES ('Computación'), ('Mecánica');
+GO
+
+INSERT INTO Area (nombrearea) VALUES ('Administración');
+GO
+
+INSERT INTO Departamento (nombredepartamento, codigoarea) VALUES 
+('Contabilidad y Finanzas', 1),
+('Dirección Académica', 1),
+('Servicios Públicos', 1);
+GO
+
+INSERT INTO Tecnico (nombre, especialidad, cedula, codigodepartamento) VALUES
+('Ana Sánchez', 1, '101', 1),
+('Luis Salas', 1, '102', 1),
+('Luis Rodríguez', 2, '103', 2);
+GO
+
+INSERT INTO Parte (nombreparte, cantidadexistencia, descripciondetallada, costounidad) VALUES
+('Memoria 256MB PC100', 10, 'Módulo de memoria para computador', 25.00),
+('Disco duro 80GB', 10, 'Disco duro para computador', 40.00),
+('Gasa manguera hidráulica', 10, 'Gasa para manguera hidráulica de vehículo', 3.00),
+('Tornillo carrocería', 10, 'Tornillo usado en carrocería de vehículo', 1.50);
+GO
+
+
+INSERT INTO Reparacion VALUES ('R01', 'Falla de hardware', 'Cambio de memoria', 1, '2024-06-01');
+INSERT INTO TecnicoReparacion VALUES (1, 'R01');
+INSERT INTO ParteReparacion VALUES (1, 'R01', 2);
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 2 WHERE codigoparte = 1;
+GO
+
+
+INSERT INTO Reparacion VALUES 
+('R02', 'Falla disco duro', 'Cambio de disco duro', 1, '2024-06-02'),
+('R03', 'Falla disco duro', 'Cambio de disco duro', 1, '2024-06-03'),
+('R04', 'Falla disco duro', 'Cambio de disco duro', 1, '2024-06-04');
+INSERT INTO TecnicoReparacion VALUES 
+(2, 'R02'), (2, 'R03'), (2, 'R04');
+INSERT INTO ParteReparacion VALUES 
+(2, 'R02', 1), (2, 'R03', 1), (2, 'R04', 1);
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 3 WHERE codigoparte = 2;
+GO
+
+
+INSERT INTO Reparacion VALUES ('R05', 'Reparación vehículo', 'Cambio de piezas', 2, '2024-06-05');
+INSERT INTO TecnicoReparacion VALUES (3, 'R05');
+INSERT INTO ParteReparacion VALUES 
+(3, 'R05', 5), (4, 'R05', 3);
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 5 WHERE codigoparte = 3;
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 3 WHERE codigoparte = 4;
+GO
+
+
+INSERT INTO Reparacion VALUES ('R06', 'Reparación moto', 'Reemplazo tornillos', 3, '2024-06-06');
+INSERT INTO TecnicoReparacion VALUES (3, 'R06');
+INSERT INTO ParteReparacion VALUES (4, 'R06', 2);
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 2 WHERE codigoparte = 4;
+GO
+
+INSERT INTO Reparacion VALUES ('R07', 'Reparación computador', 'Cambio de disco y memoria', 2, '2024-06-07');
+INSERT INTO TecnicoReparacion VALUES (2, 'R07');
+INSERT INTO ParteReparacion VALUES (1, 'R07', 1), (2, 'R07', 1);
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 1 WHERE codigoparte = 1;
+UPDATE Parte SET cantidadexistencia = cantidadexistencia - 1 WHERE codigoparte = 2;
+GO
+
+SELECT * FROM Parte;
+GO
+
+
+SELECT T.nombre, COUNT(*) AS total_reparaciones
+FROM Tecnico T
+JOIN TecnicoReparacion TR ON T.codigotecnico = TR.codigotecnico
+GROUP BY T.nombre;
+GO
+
+SELECT T.nombre
+FROM Tecnico T
+LEFT JOIN TecnicoReparacion TR ON T.codigotecnico = TR.codigotecnico
+WHERE TR.codigotecnico IS NULL;
+GO
+
+
+SELECT *
+FROM Tecnico T
+JOIN Especialidad E ON T.especialidad = E.codigodeespecialidad
+WHERE E.nombreespecialidad = 'Computación';
+GO
+
+
+SELECT T.nombre, R.codigoreparacion
+FROM Tecnico T
+JOIN TecnicoReparacion TR ON T.codigotecnico = TR.codigotecnico
+JOIN Reparacion R ON TR.codigoreparacion = R.codigoreparacion
+JOIN Departamento D ON R.codigodepartamento = D.codigodepartamento
+WHERE D.nombredepartamento = 'Dirección Académica';
+GO
+
+
+SELECT A.nombrearea, D.nombredepartamento
+FROM Departamento D
+JOIN Area A ON D.codigoarea = A.codigoarea;
+GO
+
+
+SELECT R.codigoreparacion, SUM(PR.cantidad_usada) AS total_partes
+FROM ParteReparacion PR
+JOIN Reparacion R ON PR.codigoreparacion = R.codigoreparacion
+GROUP BY R.codigoreparacion;
+GO
+
+SELECT R.codigoreparacion, SUM(P.costounidad * PR.cantidad_usada) AS costo_total
+FROM Reparacion R
+JOIN ParteReparacion PR ON R.codigoreparacion = PR.codigoreparacion
+JOIN Parte P ON PR.codigoparte = P.codigoparte
+JOIN Departamento D ON R.codigodepartamento = D.codigodepartamento
+WHERE D.nombredepartamento = 'Dirección Académica'
+GROUP BY R.codigoreparacion;
+GO
+
+
+SELECT codigoparte, nombreparte, cantidadexistencia, costounidad,
+       cantidadexistencia * costounidad AS total_inventario
+FROM Parte
+WHERE descripciondetallada LIKE '%computador%';
+GO
+
+
+DECLARE @idLuisSalas INT;
+SET @idLuisSalas = (SELECT codigotecnico FROM Tecnico WHERE nombre = 'Luis Salas');
+
+DELETE FROM TecnicoReparacion WHERE codigotecnico = @idLuisSalas;
+DELETE FROM Tecnico WHERE codigotecnico = @idLuisSalas;
+GO
